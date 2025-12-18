@@ -1,0 +1,59 @@
+# Dependencies
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Build outputs
+dist
+build
+
+# Git
+.git
+.gitignore
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# Test files
+coverage
+.nyc_output
+test
+tests
+*.test.ts
+*.spec.ts
+jest.config.json
+
+# Documentation
+docs
+*.md
+!README.md
+
+# Environment files (secrets should come from env vars or secrets manager)
+.env
+.env.*
+!.env.example
+
+# Docker files (not needed in image)
+docker-compose*.yml
+Dockerfile*
+
+# Terraform/IaC
+terraform
+kubernetes
+.github
+
+# Misc
+.DS_Store
+*.log
+logs
+tmp
+temp
+
+# Husky hooks
+.husky
+
+# SonarQube
+sonar-project.properties

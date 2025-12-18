@@ -1,0 +1,52 @@
+# =============================================================================
+# .gitignore additions for DevOps files
+# =============================================================================
+
+# Terraform
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.*
+terraform/*.tfplan
+terraform/.terraform.lock.hcl
+terraform/crash.log
+terraform/*.auto.tfvars
+
+# Kubernetes
+kubernetes/*.local.yaml
+kubernetes/secrets/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+!.env.example
+!.env.docker
+
+# Docker
+docker-compose.local.yml
+
+# Logs
+logs/
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+dist/
+build/
+coverage/
+
+# Dependencies
+node_modules/
+
+# Temporary
+tmp/
+temp/

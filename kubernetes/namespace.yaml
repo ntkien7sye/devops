@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nestjs-backend
+  labels:
+    app.kubernetes.io/name: nestjs-backend
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: nestjs-backend-quota
+  namespace: nestjs-backend
+spec:
+  hard:
+    requests.cpu: "4"
+    requests.memory: 8Gi
+    limits.cpu: "8"
+    limits.memory: 16Gi
+    pods: "20"

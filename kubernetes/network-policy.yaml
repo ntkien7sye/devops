@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: nestjs-backend-network-policy
+  namespace: nestjs-backend
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: nestjs-backend
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+      ports:
+        - protocol: TCP
+          port: 5000
+  egress:
+    - {}
