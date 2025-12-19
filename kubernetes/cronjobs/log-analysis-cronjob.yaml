@@ -1,0 +1,49 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: log-analysis
+  namespace: nestjs-backend
+spec:
+  schedule: "0 0 * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: log-analyzer
+              image: alpine:latest
+              command: ["/bin/sh", "-c"]
+              args:
+                - |
+                  apk add --no-cache curl bash
+                  /scripts/log-analyzer.sh
+              env:
+                - name: LOG_DIR
+                  value: "/app/logs"
+                - name: APP_NAME
+                  value: "nestjs-backend"
+                - name: SLACK_WEBHOOK_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: slack-webhook
+                      key: url
+                      optional: true
+              volumeMounts:
+                - name: logs
+                  mountPath: /app/logs
+                  readOnly: true
+                - name: scripts
+                  mountPath: /scripts
+                  readOnly: true
+          volumes:
+            - name: logs
+              persistentVolumeClaim:
+                claimName: nestjs-logs-pvc
+            - name: scripts
+              configMap:
+                name: log-analyzer-script
+                defaultMode: 0755
+          restartPolicy: OnFailure

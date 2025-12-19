@@ -10,3 +10,4 @@ resources:
   - ingress.yaml
   - hpa.yaml
   - network-policy.yaml
+  - cronjobs/log-analysis-cronjob.yaml
